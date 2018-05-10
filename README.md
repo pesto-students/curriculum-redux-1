@@ -44,3 +44,21 @@ On Day 12, you made a grocery list using React. In this exercise you will create
         - Screen1.css
       
       - App.js
+
+
+
+### Debugging
+
+[Redux extension for Chrome](https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd?hl=en) is highly recommended for debugging
+
+It looks like this: 
+
+![alt Extension image](./readme/extension.png)
+
+And it will help you a lot to debug and understand what's going with your code.
+
+## Redux
+
+![alt Redux image](./readme/redux.png)
+
+Source https://www.reddit.com/r/webdev/comments/4r1947/i_am_working_on_a_reactredux_video_tutorial/
