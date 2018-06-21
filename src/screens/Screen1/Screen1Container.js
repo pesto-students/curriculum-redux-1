@@ -4,16 +4,16 @@ import Screen1 from './Screen1';
 import { addItem, clearCart, purchaseItem, deleteItem, editItem } from '../../redux/actions';
 
 const mapStateToProps = state => ({
-  groceries: state,
+  groceries: state.groceryReducer,
 });
 
-const mapDispatchToProps = () => ({
+const mapDispatchToProps = {
   addItem,
   clearCart,
   purchaseItem,
   deleteItem,
   editItem,
-});
+};
 
 export default connect(
   mapStateToProps,

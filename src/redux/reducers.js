@@ -1,13 +1,13 @@
 import { combineReducers } from 'redux';
 
-const groceryReducer = (state = [], action) => {
+const groceryReducer = (state = [{ id: 1, name: 'Nikhil', purchased: false }], action) => {
   switch (action.type) {
     case 'ADD_ITEM':
       return [
         ...state,
         {
           id: action.id,
-          name: action.itemName,
+          name: action.name,
           purchased: false,
         },
       ];
