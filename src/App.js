@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { Component } from 'react';
+import Screen1 from './screens/Screen1';
 
-import './App.css';
-
-const App = () => (
-  <div>App</div>
-);
+class App extends Component {
+  render() {
+    return (
+      <Screen1 />
+    );
+  }
+}
 
 export default App;
