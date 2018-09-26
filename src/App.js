@@ -1,9 +1,10 @@
 import React from 'react';
 
 import './App.css';
+import GroceryListComponent from './components/groceryListComponent';
 
 const App = () => (
-  <div>App</div>
+  <GroceryListComponent />
 );
 
 export default App;
