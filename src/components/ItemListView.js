@@ -1,8 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
+import ItemViewComponent from './itemView';
+
 const ItemList = ({ items }) => {
-  const list = items.map(item => <li><a href="">{item}</a></li>);
+  const list = items.map(item => <ItemViewComponent item={item} key={item.id} />);
   return (
     <ul>
       {list}

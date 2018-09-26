@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { AddItem } from '../redux/actions';
+import { AddItem, UpdateItem } from '../redux/actions';
 
 class FormItem extends Component {
    state = {
-     itemValue: '',
+     isEditForm: Boolean(this.props.item),
+     itemValue: this.props.item ? this.props.item.name : '',
    }
 
    onItemChange = (event) => {
@@ -21,11 +22,17 @@ class FormItem extends Component {
      });
    }
 
+   itemUpdate = (event) => {
+     event.preventDefault();
+     this.props.UpdateItem(this.props.item.id, this.state.itemValue);
+     this.props.onFinish();
+   }
+
    render() {
      return (
-       <form onSubmit={this.itemAdd}>
-         <input type="text" name="item" onChange={this.onItemChange} value={this.state.itemValue} />
-         <input type="submit" value="Add" />
+       <form onSubmit={this.state.isEditForm ? this.itemUpdate : this.itemAdd}>
+         <input type="text" name="item" onChange={this.onItemChange} value={this.state.itemValue} autoComplete="off" />
+         {this.state.isEditForm ? <input type="submit" value="Save" /> : <input type="submit" value="Add" />}
        </form>
      );
    }
@@ -36,9 +43,9 @@ class FormItem extends Component {
 
 const mapActionToProps = {
   AddItem,
+  UpdateItem,
 };
 
 const FormConnectedApp = connect(null, mapActionToProps)(FormItem);
 
 export default FormConnectedApp;
-
