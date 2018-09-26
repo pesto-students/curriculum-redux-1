@@ -8,8 +8,7 @@ function ItemListComponent(props) {
         props.items.map((item, idx) => {
           return (
             <li
-              // eslint-disable-next-line
-              key={idx}
+              key={item.id}
               style={{ color: item.highlighted ? 'red' : 'black' }}
             >
               <a
@@ -22,6 +21,16 @@ function ItemListComponent(props) {
               >
                 {idx + 1} {item.name}
               </a>
+
+              <button
+                href=""
+                onClick={() => {
+                  props.deleteItem(idx);
+                }}
+                style={{ marginLeft: '30px' }}
+              >
+                X
+              </button>
             </li>
           );
         })

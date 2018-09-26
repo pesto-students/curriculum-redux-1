@@ -7,16 +7,18 @@ class GroceryListComponent extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      n: 3, // id of next item to be added
       items: [
-        { name: 'banana', highlighted: false },
-        { name: 'carrot', highlighted: false },
-        { name: 'onions', highlighted: true },
+        { id: 0, name: 'banana', highlighted: false },
+        { id: 1, name: 'carrot', highlighted: false },
+        { id: 2, name: 'onions', highlighted: true },
       ],
     };
 
     this.clearList = this.clearList.bind(this);
     this.addItem = this.addItem.bind(this);
     this.toggleItemHighlight = this.toggleItemHighlight.bind(this);
+    this.deleteItem = this.deleteItem.bind(this);
   }
 
   clearList() {
@@ -25,8 +27,21 @@ class GroceryListComponent extends React.Component {
 
   addItem(name) {
     this.setState((prevState) => {
+      return ({
+        n: prevState.n + 1,
+        items: prevState.items.concat({
+          id: prevState.n,
+          name,
+          highlighted: false,
+        }),
+      });
+    });
+  }
+
+  deleteItem(idx) {
+    this.setState((prevState) => {
       const newItems = prevState.items.concat([]);
-      newItems.push({ name, highlighted: false });
+      newItems.splice(idx, 1);
       return ({ items: newItems });
     });
   }
@@ -46,6 +61,7 @@ class GroceryListComponent extends React.Component {
         <ItemListComponent
           items={this.state.items}
           handleToggleItem={this.toggleItemHighlight}
+          deleteItem={this.deleteItem}
         />
 
         <button onClick={this.clearList}>Clear</button>

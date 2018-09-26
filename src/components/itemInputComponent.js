@@ -27,6 +27,7 @@ class ItemInputComponent extends React.Component {
           <input
             type="text"
             name="item"
+            required
             id="new-item-input"
             onChange={this.updateNewItemName}
             value={this.state.name}
