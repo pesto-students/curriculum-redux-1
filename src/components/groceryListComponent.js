@@ -7,13 +7,14 @@ class GroceryListComponent extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      n: 3, // id of next item to be added
       items: [
         { id: 0, name: 'banana', highlighted: false },
         { id: 1, name: 'carrot', highlighted: false },
         { id: 2, name: 'onions', highlighted: true },
       ],
     };
+
+    this.nextId = this.state.items.length;
 
     this.clearList = this.clearList.bind(this);
     this.addItem = this.addItem.bind(this);
@@ -27,14 +28,13 @@ class GroceryListComponent extends React.Component {
 
   addItem(name) {
     this.setState((prevState) => {
-      return ({
-        n: prevState.n + 1,
-        items: prevState.items.concat({
-          id: prevState.n,
-          name,
-          highlighted: false,
-        }),
-      });
+      const newItem = {
+        id: this.nextId,
+        name,
+        highlighted: false,
+      };
+      this.nextId += 1;
+      return ({ items: prevState.items.concat(newItem) });
     });
   }
 
