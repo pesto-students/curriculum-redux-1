@@ -7,19 +7,25 @@ class GroceryListComponent extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      items: [
-        { id: 0, name: 'banana', highlighted: false },
-        { id: 1, name: 'carrot', highlighted: false },
-        { id: 2, name: 'onions', highlighted: true },
-      ],
+      items: localStorage.items ?
+        JSON.parse(localStorage.items).map(item => ({ ...item, id: +item.id })) :
+        [
+          { id: 0, name: 'banana', highlighted: false },
+          { id: 1, name: 'carrot', highlighted: false },
+          { id: 2, name: 'onions', highlighted: true },
+        ],
     };
 
-    this.nextId = this.state.items.length;
+    this.nextId = this.state.items.reduce((acc, item) => Math.max(acc, item.id), 0) + 1;
 
     this.clearList = this.clearList.bind(this);
     this.addItem = this.addItem.bind(this);
     this.updateItem = this.updateItem.bind(this);
     this.deleteItem = this.deleteItem.bind(this);
+  }
+
+  componentDidUpdate() {
+    localStorage.items = JSON.stringify(this.state.items);
   }
 
   clearList() {
