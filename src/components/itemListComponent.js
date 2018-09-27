@@ -1,46 +1,31 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import ItemComponent from './itemComponent';
+
 function ItemListComponent(props) {
   return (
     <ul style={{ listStyleType: 'none' }}>
       {
-        props.items.map((item, idx) => {
+        props.items.map((item) => {
           return (
-            <li
+            <ItemComponent
               key={item.id}
-              style={{ color: item.highlighted ? 'red' : 'black' }}
-            >
-              <a
-                href=""
-                onClick={(e) => {
-                  e.preventDefault();
-                  props.handleToggleItem(idx);
-                }}
-                style={{ color: 'inherit', textDecoration: 'none' }}
-              >
-                {idx + 1} {item.name}
-              </a>
-
-              <button
-                href=""
-                onClick={() => {
-                  props.deleteItem(idx);
-                }}
-                style={{ marginLeft: '30px' }}
-              >
-                X
-              </button>
-            </li>
+              item={item}
+              updateItem={props.updateItem}
+              deleteItem={props.deleteItem}
+            />
           );
         })
       }
-    </ul >
+    </ul>
   );
 }
 
 ItemListComponent.propTypes = {
   items: PropTypes.arrayOf(PropTypes.object).isRequired,
+  updateItem: PropTypes.func.isRequired,
+  deleteItem: PropTypes.func.isRequired,
 };
 
 export default ItemListComponent;

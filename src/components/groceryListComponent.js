@@ -18,7 +18,7 @@ class GroceryListComponent extends React.Component {
 
     this.clearList = this.clearList.bind(this);
     this.addItem = this.addItem.bind(this);
-    this.toggleItemHighlight = this.toggleItemHighlight.bind(this);
+    this.updateItem = this.updateItem.bind(this);
     this.deleteItem = this.deleteItem.bind(this);
   }
 
@@ -38,19 +38,19 @@ class GroceryListComponent extends React.Component {
     });
   }
 
-  deleteItem(idx) {
+  updateItem(id, update) {
     this.setState((prevState) => {
-      const newItems = prevState.items.concat([]);
-      newItems.splice(idx, 1);
-      return ({ items: newItems });
+      return ({
+        items: prevState.items.map((item) => {
+          return item.id === id ? { ...item, ...update } : item;
+        }),
+      });
     });
   }
 
-  toggleItemHighlight(idx) {
+  deleteItem(id) {
     this.setState((prevState) => {
-      const newItems = prevState.items.concat([]);
-      newItems[idx].highlighted = !newItems[idx].highlighted;
-      return ({ items: newItems });
+      return ({ items: prevState.items.filter(item => item.id !== id) });
     });
   }
 
@@ -60,12 +60,12 @@ class GroceryListComponent extends React.Component {
         <ItemInputComponent handleSubmit={this.addItem} />
         <ItemListComponent
           items={this.state.items}
-          handleToggleItem={this.toggleItemHighlight}
+          updateItem={this.updateItem}
           deleteItem={this.deleteItem}
         />
 
         <button onClick={this.clearList}>Clear</button>
-      </div>
+      </div >
     );
   }
 }
